@@ -1,7 +1,7 @@
 replicaCount: 1
 
 image:
-  repository: your-dockerhub-username/demo-1
+  repository: admin621295/demo-1
   pullPolicy: IfNotPresent
   tag: "latest"
 
