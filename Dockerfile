@@ -1,9 +1,13 @@
-FROM quay.io/quarkus/quarkus-distroless-image:17 as builder
-COPY . /app
-WORKDIR /app
-RUN ./mvnw -DskipTests package
-
 FROM eclipse-temurin:17-jdk-alpine
-WORKDIR /work
-COPY --from=builder /app/target/demo-0.0.1-runner.jar app.jar
-ENTRYPOINT ["java","-jar","/work/app.jar"]
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the locally built JAR file
+COPY target/demo-0.1.0.jar app.jar
+
+# Expose port (optional if you use Kubernetes Service)
+EXPOSE 8080
+
+# Run the application
+ENTRYPOINT ["java", "-jar", "app.jar"]
